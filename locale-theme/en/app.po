@@ -4,4 +4,4 @@
 # call FOI "RTI" throughougout, like this:
 
 msgid "Make and browse Freedom of Information (FOI) requests"
-msgstr "Make and browse Right to Know (RTI) requests"
+msgstr "Make and browse Access to Information requests"
