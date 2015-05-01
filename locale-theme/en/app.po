@@ -5,3 +5,6 @@
 
 msgid "Make and browse Freedom of Information (FOI) requests"
 msgstr "Make and browse Access to Information requests"
+
+msgid "<strong>By law, they have to respond</strong> (<a href=\"{{url}}\">why?</a>)."
+msgstr "<strong>According to the Code of Access to Information, they have to respond</strong> (<a href=\"{{url}}\">why?</a>)."
