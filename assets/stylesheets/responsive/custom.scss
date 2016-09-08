@@ -1,47 +1,37 @@
-$locale-bg: #333;
-$locale-color: #999999;
-$locale-hover-color: #fff;
-$link-color: #336C86;
-$body-font-color: #333;
-$body-bg: #f7eee1;
-$button-bg: #8b9352;
-$button-color: #fff;
-$heading-color: #3d3b38;
-$font-family: "Roboto Slab", Georgia, serif;
-$sans-serif-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$color_sand: #f3f1eb;
+$color_black: #333333;
+$color_orange: #f4a140;
+$color_blue: #4faded;
+$color_green: #62b356;
+$color_yellow: #ffd836;
+$color_red: #e04b4b;
+$color_violet: #a94ca6;
+$color_purple: #5c377f;
+$color_white: #ffffff;
 
-$main_menu-bg: #2c5d74;
-$main_menu-search_text: #333;
-$main_menu-link_text: #fff;
-$main_menu-search_bg: #67848c;
-$banner_bg: #354c56;
-$submenu-color: #9aa6ab;
+$color_neutral_light: $color_sand;
+$color_neutral_dark: $color_black;
+$color_primary: $color_violet;
+$color_secondary: $color_orange;
 
-$main_menu-link_bg: #2c5d74;
-$main_menu-active_link_text: $main_menu-link_bg;
-$main_menu-active_link_bg: $body-bg;
+$body-bg: $color_neutral_light;
 
-$footer-bg: #333;
-$footer-color: #ccc;
-$footer-link-color: #fff;
+$body-font-color: $color_neutral_dark;
+$link-color: darken($color_blue, 20%);
+$action-color: $color_green;
+$font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$form_input-bg: $color_white;
 
-$incoming-correspondence-color: #8c6673;
-$outgoing-correspondence-color: #6d918d;
-$correspondence-bg: #fff;
-$correspondence-shadow: #d3d3d3;
+$button-bg: darken($color_green, 10%);
+$button-color: $color_white;
 
-$status-success: #aab26e;
-$status-failure: #ff7959;
-$status-pending: #e69e5d;
+$status-success: darken($color_green, 18%);
+$status-failure: darken($color_red, 10%);
+$status-pending: darken($color_orange, 28%);
 
-$notice-bg: #D7DABD;
-$notice-border: #839310;
-
-$error-bg: #ebc3a9;
-$error-border: #a1432c;
-
-$action-bg: #edd3b8;
-$action-border: #d69457;
+$notice-color: $color_green;
+$error-color: $color_red;
+$action-color: $color_orange;
 
 /* Mixin styles */
 
@@ -55,16 +45,14 @@ $action-border: #d69457;
 /* General styling of nav menu items */
 %menu-item {
   text-decoration: none;
-  background-color: $main_menu-link_bg;
-  color: transparentize($main_menu-link_text, 0.2);
+  color: transparentize($color_white, 0.2);
   @include ie8 {
-    color: $main_menu-link_text;
+    color: $color_white;
   }
   transition: background-color 0.5s ease-out;
-
   &:hover{
-      background-color: darken($main_menu-bg, 5%);
-      color: transparentize($main_menu-link_text, 0);
+    background-color: darken($color_primary, 15%);
+    color: $color_white;
   }
 
 }
@@ -72,22 +60,10 @@ $action-border: #d69457;
 /* Selected menu item */
 %selected-menu-item {
   font-weight: bold;
-  color: $main_menu-active_link_text;
-  background-color: $main_menu-active_link_bg;
+  color: $color_primary;
+  background-color: $color_neutral_light;
   &:hover{
-      background-color: $main_menu-active_link_bg;
-  }
-}
-
-/* Styling if not part of the main menu on larger screens */
-%sub-menu-item {
-  @include respond-min( $main_menu-mobile_menu_cutoff ){
-    background-color: $banner_bg;
-    color: $submenu-color;
-    &:hover{
-        background-color: $banner_bg;
-        color: transparentize($main_menu-link_text, 0);
-    }
+      background-color: $color_neutral_light;
   }
 }
 
@@ -101,13 +77,16 @@ body{
   font-family: $font-family;
 }
 
-a{
-  color: $link-color;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  color: $heading-color;
-  font-family: $font-family;
+a {
+  &:link,
+  &:visited {
+    color: $link-color;
+  }
+  &:hover,
+  &:active,
+  &:focus {
+    color: darken($link-color, 10%);
+  }
 }
 
 /* Let h1s be a little smaller on small screens */
@@ -126,7 +105,7 @@ form input[type="url"],
 form input[type="tel"],
 form input[type="number"] {
     border-radius: 0;
-    background-color: $main_menu-link_text;
+    background-color: $form_input-bg;
     /* Set a fixed height for text inputs in older IE 8 */
     @include ie8{
         height: 2.3125em;
@@ -139,78 +118,124 @@ form input[type="number"] {
 
 input.use-datepicker[type=text] {
   width: 130px;
-  background:image-url('calendar.png') no-repeat 100px 5px $main_menu-link_text;
+  background:image-url('calendar.png') no-repeat 100px 5px $form_input-bg;
+}
+
+/* Button styles */
+
+@mixin button-base($size: normal, $disabled: false) {
+  padding: 0.5em 1.25em;
+  border-radius: 3px;
+  display: inline-block;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 300ms ease-out;
+  margin-bottom: 0;
+  font-family: $font-family;
+  @if $size == large {
+    font-size: 2.2em;
+  }
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+    transition: background-color 300ms ease-out;
+  }
+  @if $disabled {
+    opacity: 0.333;
+    transition: none;
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: inherit;
+      color: inherit;
+      cursor: default;
+      transition: none;
+    }
+  }
+}
+
+@mixin button-primary($args...) {
+  @include button-base($args...);
+  color: $color_white;
+  background-color: $button-bg;
+  border: none;
+  &:hover,
+  &:active,
+  &:focus,
+  &:visited:hover,
+  &:visited:active,
+  &:visited:focus {
+    background-color: darken($button-bg, 10%);
+    color: $color_white;
+  }
+}
+
+@mixin button-secondary($args...) {
+  @include button-base($args...);
+  background-color: desaturate(darken($color_sand, 10%), 5%);
+  color: $color_black;
+  font-weight: normal;
+  &:hover,
+  &:active,
+  &:focus {
+    color: $color_black;
+    background-color: desaturate(darken($color_sand, 20%), 5%);
+  }
+}
+
+@mixin button-tertiary($args...) {
+  @include button-base($args...);
+  background-color: desaturate(darken($color_sand, 5%), 5%);;
+  color: $color_black;
+  font-weight: normal;
+  border: 1px solid desaturate(darken($color_sand, 15%),5%);
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: darken($color_sand, 7.5%);
+    border: 1px solid desaturate(darken($color_sand, 25%),5%);
+  }
 }
 
 form input[type=submit], a.link_button_green, a.link_button_green_large {
+  @include button-primary;
   text-decoration: none;
-  color: $button-color;
-  background-color: darken($button-bg, 5%);
-  display: inline-block;
-  cursor: pointer;
-  /* This style is expressed for all borders to avoid triggering an IE9 border rendering bug */
-  border-style: solid; border-color: darken($button-bg, 15%); border-width: 0 0 4px 0;
-  border-radius: 0;
-  padding: 3px 7px;
-  line-height: normal;
-  font-size: 1.1rem;
-  /* Same height as form elements */
-  height: 2.3125rem;
-  @include ie8 {
-     height: 2.3125em;
-     font-size: 1.1em;
-   }
-  vertical-align: top;
-  &:focus, &:hover{
-    text-decoration: none;
-    background-color: darken($button-bg, 10%);
-    border-bottom: 4px solid darken($button-bg, 20%);
-  }
-}
-
-@include lte-ie7{
-
-  a.link_button_green, a.link_button_green_large {
-    padding: 0 7px;
-    height: 31px;
-    font-weight: bold;
-  }
-
-  form input[type=submit] {
-    padding: 0;
-    height: 35px;
-  }
 }
 
 a.link_button_green_large {
-  font-size: 2.2rem;
-  height: inherit;
-  padding: 0 10px;
-  @include ie8 {
-     font-size: 2.2em;
-     height: 66px;
-   }
-   @include lte-ie7 {
-     height: 50px;
-   }
+  @include button-primary($size: large);
 }
 
 /* Popups */
 
 .popup {
-  background-color: $notice-bg;
-  border: 3px solid $notice-border;
+  background-color: desaturate(lighten($notice-color, 30%),10%);
+  border: 3px solid $notice-color;
 }
 
 
 /* Header */
 
 #banner_inner {
-  background-color: $banner-bg;
+  background-color: $color_primary;
 }
 
 #topnav {
-  background-color: $main_menu-bg;
+  background-color: darken($color_primary, 10%);
+}
+
+.site-title__logo {
+  // Smaller logo on mobiles
+  width: ($logo-width / 2);
+  height: ($logo-height / 2);
+  background-size: ($logo-width / 2) ($logo-height / 2);
+
+  @include respond-min( $main_menu-mobile_menu_cutoff ){
+    width: $logo-width;
+    height: $logo-height;
+    background-size: $logo-width $logo-height;
+  }
 }
 
 #navigation{
@@ -245,15 +270,12 @@ a.link_button_green_large {
   }
 
   #navigation_search_button{
-    background-color: mix($main_menu-search_bg, $main_menu-bg, 50%);
+    background-color: $color_white;
     border: none;
     transition: all 0.3s ease-out;
-    color: $main_menu-search_text;
+    color: $color_primary;
     border-radius: 0;
     font-size: inherit;
-    &:focus{
-        background-color: $main_menu-link_text;
-    }
   }
 }
 
@@ -262,10 +284,9 @@ a.link_button_green_large {
 }
 /* Notices, errors */
 
-#notice, #error, .errorExplanation, #request_header_text, #hidden_request, .describe_state_form form, .undescribed_requests {
+#notice, #error, .errorExplanation, #request_header_text, #hidden_request, .describe_state_form form, .undescribed_requests, .warning {
   border-top: 10px solid;
-  font-size: 1.2em;
-  border-radius: 0;
+  font-size: 1em;
   margin:1em 0;
   padding: 1.5em;
 
@@ -283,69 +304,213 @@ a.link_button_green_large {
 }
 
 #notice, #request_header_text {
-  background-color: $notice-bg;
-  border-color: $notice-border;
+  background-color: desaturate(lighten($notice-color, 30%),10%);
+  border-color: $notice-color;
 }
 
-#error, .errorExplanation, #hidden_request {
-  background-color: $error-bg;
-  border-color: $error-border;
+#error, .errorExplanation, #hidden_request, .warning {
+  background-color: desaturate(lighten($error-color, 30%),10%);
+  border-color: $error-color;
 
 }
 
 .undescribed_requests {
-  background-color: $action-bg;
-  border-color: $action-border;
+  background-color: desaturate(lighten($action-color, 30%),10%);
+  border-color: $action-color;
 }
 
 /* Logged and local options act like submenus */
 #logged_in_bar{
+  @include respond-min($main_menu-mobile_menu_cutoff) {
+    top: 0;
+  }
+
   a {
     @extend %menu-item;
-    @extend %sub-menu-item;
+    background-color: transparent;
     font-weight: normal;
+    color: $color_white;
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: transparent;
+    }
   }
   #logged_in_links {
-    top: 4em;
-    .greeting, a {
+    a {
       font-weight: normal;
     }
   }
 }
 
+/* LANGUAGE SWITCHER */
 #user_locale_switcher {
-  @include respond-min( $main_menu-mobile_menu_cutoff ){
-    background-image: image-url('locale-switcher.png');
-    background-repeat: no-repeat;
-    background-position: 0.5em 0.5em;
-    background-color: $locale-bg;
-    border-radius: 0 0 1.25em 1.25em;
-    padding: 0 1em 0 2.5em;
-    right: 15px;
+  background-color: $color_primary;
+  @include respond-min($main_menu-mobile_menu_cutoff) {
+    background-color: transparent;
   }
-  a {
-    @extend %menu-item;
-    font-family: $sans-serif-font-family;
-    @include respond-min( $main_menu-mobile_menu_cutoff ){
-      padding: 0.5em 0.2em;
-      background-color: $locale-bg;
-      border-radius: 0 0 1.25em 1.25em;
-      color: $locale-color;
-      &:hover{
-          background-color: $locale-bg;
-          color: $locale-hover-color;
+}
+
+/* Dropdown list for switching locale */
+.locale-list {
+  border-bottom: 0;
+  @include respond-min($main_menu-mobile_menu_cutoff) {
+    position: absolute;
+    left: ($logo-width + 40px);
+    top: 2.2em;
+    right: auto;
+  }
+  .locale-list-trigger {
+    margin-bottom: 0;
+    color: $color_white;
+    color: transparentize($color_white, 0.8);
+    @include respond-min($main_menu-mobile_menu_cutoff) {
+      margin-top: 0;
+      border: 1px solid desaturate(lighten($color_primary, 5%), 5%);
+      border-radius: 3px;
+      color: $link-color;
+      padding: 0;
+    }
+  }
+}
+
+.locale-list-trigger .current-locale {
+  position: relative;
+  z-index: 999;
+  border-radius: 3px;
+  color: $color_white;
+  @include respond-min($main_menu-mobile_menu_cutoff) {
+    padding: 0.66em 2em 0.66em 0.66em;
+  }
+}
+
+.locale-list-trigger .current-locale:after {
+  display: block;
+  position: absolute;
+  content: '';
+  right: 10px;
+  top: 12px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  @include ie8 {
+    border-top: 5px solid $color_white;
+  }
+  border-top: 5px solid transparentize($color_white, 0.6);
+}
+
+.locale-list-trigger .current-locale,
+.locale-list .available-languages a {
+  display: block;
+  cursor: pointer;
+  font-weight: normal;
+  @include respond-min($main_menu-mobile_menu_cutoff) {
+    font-size: 0.8125em;
+    line-height: 1em;
+  }
+}
+
+.locale-list .available-languages {
+  display: none;
+  padding: 0;
+  margin-bottom: 0;
+  margin-top: 0;
+  font-size: 0.8125em;
+  @include respond-min($main_menu-mobile_menu_cutoff) {
+    position: absolute;
+    top: 2em;
+    left: 0;
+    z-index: 1000;
+    border-radius: 3px;
+    font-size: 1em;
+    min-width: 100%;
+  }
+
+}
+
+.locale-list li {
+  list-style-type: none;
+  border-bottom: 1px solid desaturate(lighten($color_primary, 3%), 5%);
+  @include respond-min($main_menu-mobile_menu_cutoff) {
+    border-bottom-color: $color_neutral_dark;
+    display: block;
+  }
+  &:last-child {
+    @include respond-min($main_menu-mobile_menu_cutoff) {
+      border-bottom: 0;
+      a {
+        border-bottom-right-radius: 3px;
+        border-bottom-left-radius: 3px;
       }
     }
   }
 }
 
+.locale-list .available-languages a,
+.locale-list .available-languages a:link,
+.locale-list .available-languages a:visited {
+  display: block;
+  background-color: $color_primary;
+  padding: 0.66em 1em;
+  width: 100%;
+  text-decoration: none;
+  color: transparentize($color_white, 0.2);
+  @include ie8 {
+    color: $color_white;
+  }
+  @include respond-min($main_menu-mobile_menu_cutoff) {
+    background-color: lighten($color_neutral_dark, 6%);
+  }
+  transition: background-color 0.5s ease-out;
+}
+
+.locale-list .available-languages a:hover,
+.locale-list .available-languages a:focus {
+  border-bottom: none;
+  background-color: darken($color_primary, 5%);
+  @include respond-min($main_menu-mobile_menu_cutoff) {
+    background-color: $color_neutral_dark
+  }
+  color: $color_white;
+
+}
+
+/* JS interactivity */
+.no-js .locale-list .available-languages,
+.locale-list.active .available-languages {
+  display: block;
+}
+
+.locale-list.active .current-locale {
+  background-color: $color_primary;
+  color: $color_white;
+  border-color: $color_primary;
+  @include respond-min($main_menu-mobile_menu_cutoff) {
+    background-color: lighten($color_neutral_dark, 6%);
+    border-bottom: 1px solid lighten($color_neutral_dark, 2%);
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+.locale-list.active .current-locale:after {
+  @include ie8 {
+    border-top-color: $color_white;
+  }
+  border-top-color: transparentize($color_white, 0.6);
+}
+
+
+.locale-list.active .locale-list-trigger {
+  border-color: transparent;
+  @include respond-min($main_menu-mobile_menu_cutoff) {
+    border-color: $color_neutral_dark;
+  }
+}
+
 
 #banner {
-
-  /* locale border */
-  @include respond-min( $main_menu-mobile_menu_cutoff ){
-    border-top: 4px solid $locale-bg;
-  }
 
   /* Hide the greeting on smaller devices */
   .greeting {
@@ -354,9 +519,8 @@ a.link_button_green_large {
 
   .rsp_menu_button{
     position: absolute;
-    top: 0;
-    /* 15px for margin minus 9 for background offset*/
-    right: 4px;
+    top: 5px; // vertically centre the button in the header
+    right: 4px; // 15px for margin minus 9 for background offset
     @extend .image-replacement;
     background-image: image-url('hamburger.png');
     background-repeat: no-repeat;
@@ -369,6 +533,13 @@ a.link_button_green_large {
     a {
       width: 100%;
       height: 100%;
+    }
+  }
+
+  &:target {
+    .rsp_menu_button {
+      top: 5px;
+      right: 4px;
     }
   }
 
@@ -393,53 +564,55 @@ a.link_button_green_large {
 
 /* Footer */
 #footer {
-  background-color: $footer-bg;
-  color: $footer-color;
-  padding: 2em 4em;
-  font-family: $sans-serif-font-family;
+  background-color: $color_neutral_dark;
+  color: darken($color_neutral_light, 10%);
   a {
     text-decoration: none;
-    color: $footer-link-color;
+    color: $color_white;
+    &:hover,
+    &:active,
+    &:focus {
+      color: lighten($color_primary, 10%);
+      text-decoration: underline;
+    }
   }
-  ul > li:nth-child(4n+1) {
-    padding-top: 0;
-  }
+}
 
-  ul li {
-    padding: 1em 0 0 0 ;
-    text-align: bottom;
+.footer__about {
+  h2 {
+    color: $color_white;
+  }
+}
+
+.footer__final {
+  .row {
+    border-top: 1px solid lighten($color_neutral_dark, 6%);
   }
 }
 
 /* Request page */
 div.correspondence {
-  background-color: $correspondence-bg;
-  padding-bottom: 0.5em;
-  .event_actions {
-    margin-bottom: 0;
-  }
+  background-color: $color_white;
+  box-shadow: 0 2px 2px transparentize($color_black, 0.8);
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 2em;
 }
 
 .incoming.correspondence {
-  border: none;
-  border-top: 8px solid $incoming-correspondence-color;
-  box-shadow: 0 3px 3px $correspondence-shadow;
-  font-family: "Courier New", Courier, monospace;
-  font-size: 0.9rem;
-  @include ie8 {
-    font-size: 0.9em;
+  border-top: 8px solid $color_secondary;
+  a {
+    color: $color_secondary;
   }
   a.link_to_this {
-    background-color: $incoming-correspondence-color;
+    background-color: $color_secondary;
   }
 }
 
 .outgoing.correspondence {
-  border: none;
-  border-top: 8px solid $outgoing-correspondence-color;
-  box-shadow: 0 3px 3px $correspondence-shadow;
+  border-top: 8px solid $color_primary;
   a.link_to_this {
-    background-color: $outgoing-correspondence-color;
+    background-color: $color_primary;
   }
 }
 
@@ -454,7 +627,7 @@ a.link_to_this {
   }
   background-position: center center;
   background-repeat: no-repeat;
-  background-size: 70% 70%;
+  background-size: 14px;
   border-radius: 50%;
   height: 20px;
   width: 20px;
@@ -463,9 +636,9 @@ a.link_to_this {
 #link_box {
   font-family: $font-family;
   border-radius: 0;
-  border: 1px solid $heading-color;
+  border: 1px solid $color_neutral_dark;
   .close-button {
-    background-color: $correspondence-bg;
+    background-color: $color_secondary;
     float: right;
   }
 }
@@ -474,15 +647,27 @@ a.link_to_this {
   padding: 0;
 
   form{
-    background-color: $action-bg;
-    border-color: $action-border;
+    background-color: desaturate(lighten($action-color, 30%),10%);
+    border-color: $action-color;
     h2 {
       margin-top: 0;
     }
     hr {
-      border-color: $action-border;
+      border-color: $action-color;
     }
   }
+}
+
+.feed_link_sidebar .link_button_green {
+  @include button-primary();
+}
+
+.report-this-request {
+  @include button-secondary();
+  color: $color_black !important;
+  /* Using !important here as a temporary fix for a bad declaration (a:link)
+    in Alaveteli core. When this is fixed it can be removed.
+  */
 }
 
 /* Status lines and icons */
@@ -515,16 +700,22 @@ a.link_to_this {
 
 .view_html_prefix {
   font-family: $font-family;
-  background-color: $banner-bg;
-  color: transparentize($main_menu-link_text, 0.2);
+  background-color: $color_primary;
+  color: transparentize($color_white, 0.2);
   @include ie8 {
-    color: $main_menu-link_text;
+    color: $color_white;
   }
   a {
-    color: $main_menu-link_text;
+    color: $color_white;
   }
   .view_html_logo, .view_html_description {
     padding-top: 1em;
+  }
+}
+
+#header_right {
+  .link_button_green {
+    @include button-secondary;
   }
 }
 
@@ -538,7 +729,6 @@ a.link_to_this {
 /* Help pages */
 
 dt {
-  color: $heading-color;
   font-weight: 700;
   @include respond-min( $main_menu-mobile_menu_cutoff ){
     font-size: 2em;
@@ -548,10 +738,152 @@ dt {
 
 /* Front page */
 /* Drop the extract indentation on small screens */
-#frontpage_examples .excerpt {
+#frontpage_examples {
+  .excerpt {
     padding: 0.2em 0 0 0;
     @include respond-min( $main_menu-mobile_menu_cutoff ){
       padding: 0 0 0 2em;
     }
+  }
+  p strong a {
+    @include button-secondary;
+  }
 }
 
+/* How it works section */
+.steps__list {
+  li {
+    @include respond-min( $main_menu-mobile_menu_cutoff ){
+      width: 33.3333%;
+      margin-left: 0 !important;
+    }
+  }
+}
+
+.steps__step-box {
+  background-color: $color_white;
+  padding: 2em;
+  box-shadow: 0 1px 2px transparentize($color_black, 0.75);
+  @include respond-min( $main_menu-mobile_menu_cutoff ){
+    min-height: 11em;
+  }
+  p {
+    line-height: 1.5em;
+    color: $color_neutral_dark;
+  }
+}
+
+.steps__step-number {
+  height: 3.5em;
+  width: 3.5em;
+  background-color: $color_primary;
+  box-shadow: 0 1px 2px transparentize($color_black, 0.75);
+  padding: 1em;
+  border-radius: 100%;
+  color: $color_white;
+  @include respond-min( $main_menu-mobile_menu_cutoff ){
+    left: 50%;
+    margin-left: -1.75em;
+    bottom: -1em;
+    top: auto;
+  }
+}
+
+.learn-more-foi {
+  @include respond-min( $main_menu-mobile_menu_cutoff ){
+    margin-top: 3em;
+  }
+  a {
+    @include button-secondary;
+  }
+}
+
+.learn-more-foi {
+  @include respond-min( $main_menu-mobile_menu_cutoff ){
+    margin-top: 3em;
+  }
+  a {
+    @include button-secondary;
+  }
+}
+
+.latest-requests {
+  .button-secondary {
+    @include button-secondary;
+  }
+}
+
+/* Authority page */
+.action-bar__follower-count {
+  padding: 3px;
+  font-size: 1.1rem;
+}
+
+.action-bar__follow-button {
+  .link_button_green {
+    @include button-secondary();
+  }
+}
+
+.authority__body__sidebar form input[type=submit] {
+  @include button-secondary();
+}
+
+.homepage-hero {
+  background-color: $color_neutral_dark;
+  background-image: image-url('homepage-background-small.jpg');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  color: $color_white;
+  padding: 2em 0 5em;
+  position: relative;
+  @include respond-min($main_menu-mobile_menu_cutoff) {
+    padding: 5em 0 8em;
+    background-image: image-url('homepage-background.jpg');
+  }
+
+  a {
+    color: $color_secondary;
+    &:hover,
+    &:active,
+    &:focus {
+      color: $color_white;
+    }
+  }
+
+  .new-request__make-new-requests {
+    @include button-base;
+    background-color: desaturate(darken($color_secondary, 10%), 5%);
+    color: $color_white;
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: darken($color_secondary, 20%);
+    }
+  }
+}
+
+.intro__title {
+  color: $color_white;
+  text-shadow: 0 1px 2px transparentize($color_black, 0.7);
+}
+
+.new-request__content {
+  background-color: $color_neutral_dark;
+  border-radius: 5px;
+  padding: 1.888888889em;
+}
+
+.new-request__title {
+  color: $color_white;
+  font-size: 1.4375em;
+  margin: 0 0 0.5em;
+}
+
+.new-request__description {
+  color: transparentize($color_white, 0.2);
+  @include ie8 {
+    color: $color_white;
+  }
+}

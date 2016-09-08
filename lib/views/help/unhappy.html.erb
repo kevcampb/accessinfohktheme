@@ -1,12 +1,12 @@
 <% @title = "Unhappy about an Access to Information request?" %>
 
 
-<% if !@info_request.nil? %>
-<h1>Unhappy about the response you got
-to your request '<%=request_link(@info_request) %>'?
-</h1>
+<% if @info_request %>
+  <h1>Unhappy about the response you got
+    to your request '<%=request_link(@info_request) %>'?
+  </h1>
 <% else %>
-<h1>Unhappy about the response you got?</h1>
+  <h1>Unhappy about the response you got?</h1>
 <% end %>
 
 <p>If ...</p>
@@ -28,9 +28,9 @@ to your request '<%=request_link(@info_request) %>'?
 <h1 id="internal_review">1. Asking for an internal review <a class="hover_a" href="#internal_review">#</a> </h1>
 
 <p>
-<% if !@info_request.nil? %>
+  <% if @info_request %>
     <%= link_to "Request an internal review", new_request_followup_path(:request_id => @info_request.id) + "?internal_review=1#followup", :class => 'link_button_green request-internal-review-action' %> and then write a message asking the authority to review your request.
-<% else %>
+  <% else %>
     At the bottom of the relevant request page on <%= site_name %> choose
     "request an internal review". Then write a message asking for an internal
     review of your request. You may want to include a link to the
@@ -50,15 +50,14 @@ internal review, then you can complain to the Ombudsman. To do so, please visit 
 
 <p>To make it easier to send the relevant information to the
   Ombudsman, either
-  <% if !@info_request.nil? %>
+  <% if @info_request %>
     include a link to your request
     <strong><%=h request_url(@info_request) %></strong>
-<% else %>
+  <% else %>
     include a link to your request on <%= site_name %>
 <% end %>
 in your complaint or print out the whole page of your request and all attachments.
 </p>
-
 
 <p><%= site_name %> has no special facilities for handling a request at this stage - it
 passes into the Ombudsman's system. You can leave annotations on your
