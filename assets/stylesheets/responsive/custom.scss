@@ -922,11 +922,19 @@ body {
     color: #405866;
 }
 
+a:link, a:visited {
+    color: #329A91;
+}
+
 #banner_inner {
     background-color: #254151;
 }
 
 #topnav {
+    background-color: #329A91;
+}
+
+#navigation a:hover, #logged_in_bar a:hover {
     background-color: #329A91;
 }
 
@@ -954,10 +962,6 @@ body {
 .learn-more-foi a {
     background-color: #E07769;
     color: #ffffff;
-}
-
-a:link, a:visited {
-    color: #329A91;
 }
 
 .latest-requests .button-secondary {
