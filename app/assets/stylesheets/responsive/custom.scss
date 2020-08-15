@@ -909,3 +909,70 @@ dt {
     color: $link-color;
   }
 }
+
+
+
+/**
+ * Sherin's styles
+ */
+
+
+body {
+    background-color: #FCFCFA;
+    color: #405866;
+}
+
+a:link, a:visited {
+    color: #329A91;
+}
+
+#banner_inner {
+    background-color: #254151;
+}
+
+.locale-list {
+  top: 0.2em;
+}
+
+#topnav {
+    background-color: #329A91;
+}
+
+#navigation a:hover, #logged_in_bar a:hover {
+    background-color: #329A91;
+}
+
+.locale-list .locale-list-trigger {
+    border: 1px solid #E07769;
+}
+
+.homepage-hero .new-request__content {
+    background-color: #254151;
+}
+
+.homepage-hero .new-request__make-new-requests {
+    background-color: #E07769;
+    color: #fff;
+}
+
+.homepage-hero a {
+    color: #EA988C;
+}
+
+.steps__step-number {
+    background-color: #329A91;
+}
+
+.learn-more-foi a {
+    background-color: #E07769;
+    color: #ffffff;
+}
+
+.latest-requests .button-secondary {
+    background-color: #E07769;
+    color: #fff;
+}
+
+#footer {
+    background-color: #405866;
+}
