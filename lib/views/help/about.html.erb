@@ -13,7 +13,7 @@
 </div>
 
     <dt id="purpose">What is <%= site_name %> for? <a href="#purpose">#</a> </dt>
-    <dd>To help you find out inside information about what the government
+    <dd>To help you find out inside information about what the Hong Kong government
       is doing.
     </dd>
 
@@ -26,14 +26,14 @@
 
     <dt id="whybother_me">Why would I bother to do this? <a href="#whybother_me">#</a> </dt>
     <dd>You pay taxes, and then government does things with the money. All sorts of
-      things that affect your life, from healthcare through to national defence. Some
+      things that affect your life, from healthcare through to housing. Some
       it does badly, some it does well. The more we find out about how government
       works, the better able we are to make suggestions to improve the things that
       are done badly, and to celebrate the things that are done well.
     </dd>
 
     <dt id="whybother_them">Why would the public authority bother to reply? <a href="#whybother_them">#</a> </dt>
-    <dd>Under Freedom of Information (FOI) law, they have to respond. The response
+    <dd>Under the <a href="http://www.access.gov.hk">Code on Access to Information</a>, they have to respond. The response
       will either contain the information you want, or give a valid legal reason why
       it must be kept confidential.
     </dd>
@@ -41,7 +41,7 @@
     <dt id="reporting">What if I see a request I feel to be inappropriate? <a href="#reporting">#</a></dt>
     <dd>
       <p>
-        Requests for personal information and vexatious requests are not considered valid for FOI purposes (read more).
+        Requests for personal information, vexatious requests and requests which would harm or prejudice Hong Kong's defence and security are not considered valid for FOI purposes (<a href="https://www.access.gov.hk/en/codeonacctoinfo/part2.html">read more</a>).
       </p>
 
       <p>
@@ -67,14 +67,26 @@
     </dd>
 
     <dt id="who">Who makes <%= site_name %> ? <a href="#who">#</a> </dt>
-    <dd><%= site_name %> runs on <a href="http://alaveteli.org">Alaveteli</a>, which was created and run by <a href="http://www.mysociety.org">mySociety</a>, a registered charity,
+    <dd>
+      <p>AccessInfo has been setup by Guy Freeman and is currently run and maintained
+        by CivicSight in Hong Kong. A platform to increase access to public data and
+        to support people to make sense of the information they receive. CivicSight is
+        registered as a charity in the United States and housed within
+        the <a href="http://www.leitnercenter.org/">Leitner Center</a> for International
+        Law and Justice at Fordham Law School.
+      </p>
+
+      <p>
+        <%= site_name %> runs on <a href="http://alaveteli.org">Alaveteli</a>, which was created and run by <a href="http://www.mysociety.org">mySociety</a>, a registered charity,
       and was initially <a href="http://www.mysociety.org/2006/12/06/funding-for-freedom-of-information/">funded by the JRSST Charitable Trust</a>.
       If you like what we're doing, then you can
       <a href="https://www.mysociety.org/donate/">make a donation</a>.
+      </p>
     </dd>
 
     <dt id="updates">How can I keep up with news about <%= site_name %>?<a href="#updates">#</a> </dt>
-    <dd>We have a <a href="<%= blog_path %>">blog</a><% if !MySociety::Config.get('TWITTER_USERNAME', '').empty? %> and a <a href=https://twitter.com/<%= MySociety::Config.get('TWITTER_USERNAME', '') %>>twitter feed</a><% end %>.
+    <dd>
+      CivicSight has a <a href="http://civicsight.org/news/">blog</a>, <a href="https://twitter.com/civicsightasia/">twitter</a> and <a href="https://www.facebook.com/civicsightasia/">facebook</a> pages that you can follow for updates and news.
     </dd>
 
   </dl>

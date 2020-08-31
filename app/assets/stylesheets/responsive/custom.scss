@@ -926,12 +926,18 @@ a:link, a:visited {
     color: #329A91;
 }
 
+#banner .civicsight-logo {
+  width: 180px;
+  padding-right: 20px;
+  margin-right: 20px;
+  border-right: 1px solid #5B6F7B;
+}
 #banner_inner {
     background-color: #254151;
 }
-
-.locale-list {
-  top: 0.2em;
+#banner .banner_site-title {
+  display: flex;
+  width: 40%;
 }
 
 #topnav {
@@ -942,8 +948,21 @@ a:link, a:visited {
     background-color: #329A91;
 }
 
+.locale-list {
+  width: 14%;
+  position: relative;
+  top: 0;
+  left: 0;
+}
 .locale-list .locale-list-trigger {
     border: 1px solid #E07769;
+}
+.locale-list .available-languages a, .locale-list .available-languages a:link, .locale-list .available-languages a:visited {
+    background-color: #E07769;
+}
+
+.logged_in_bar {
+  width: 20%;
 }
 
 .homepage-hero .new-request__content {
@@ -975,4 +994,16 @@ a:link, a:visited {
 
 #footer {
     background-color: #405866;
+}
+#footer .footer__about {
+  width: 100%;
+}
+#footer .civicsight-logo {
+  width: 100px;
+  float: right;
+  margin-top: -40px;
+}
+
+.footer__final .row {
+    border-top: 1px solid #EA988C;
 }
